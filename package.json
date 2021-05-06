@@ -1,0 +1,12 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Simeon Arabov <arabov.simeon1990@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "sites/*",
+    "packages/*"
+  ]
+}
