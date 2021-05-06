@@ -4,7 +4,6 @@ const puppeteer = require("puppeteer");
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto("https://coinmarketcap.com/");
-  //await page.screenshot({ path: "example.png" });
 
   const coinValue = await page.evaluate((sel) => {
     return document.querySelector(sel).innerText.split("$")[1].replace(",", "");
