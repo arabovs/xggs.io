@@ -2,7 +2,9 @@
 
 name: CI
 
-on:  
+on: 
+  push:
+  pull_request:
   schedule:
     - cron: '1 * * * *'
     
@@ -13,7 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.5
-      - uses: bahmutov/npm-install@v1.6.0
-      - name: Run scraper
-        run: node .\packages\coinmarket-cap-scraper\src\puppeteer/puppeteerFactory.js
+      - run: ls
+      # - uses: bahmutov/npm-install@v1.6.0
+
+      # - name: Run scraper
+        # run: node .\packages\coinmarket-cap-scraper\src\puppeteer/puppeteerFactory.js
 
