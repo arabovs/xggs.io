@@ -1,6 +1,6 @@
 const { default: gql } = require("graphql-tag");
 const puppeteer = require("puppeteer");
-const client = require("./hasura/hasuraClient");
+const updateCoinPrice = require("../hasura/hasuraHelper");
 
 const URL_COINMARKETCAP = "https://coinmarketcap.com/";
 const URL_XE =
@@ -39,24 +39,11 @@ const getPageData = async (browser, url, selector) => {
 (async () => {
   const browser = await puppeteer.launch();
   const btcPrice = await getPageData(browser, URL_COINMARKETCAP, SELECTOR_BTC);
-  await client.mutate({
-    mutation: gql`
-      mutation inserBTCPrice($objects: [crypto_price_updates_insert_input!]!) {
-        insert_crypto_price_updates(objects: $objects) {
-          affected_rows
-        }
-      }
-    `,
-    variables: {
-      objects: [
-        {
-          value: btcPrice,
-          crypto_code: BTC_CODE,
-          crypto_name: "Bitcoin",
-          source: "CMC",
-        },
-      ],
-    },
+  await updateCoinPrice({
+    value: btcPrice,
+    crypto_code: "BTC",
+    crypto_name: "Bitcoin",
+    source: "CC",
   });
   process.exit(0);
   await browser.close();

@@ -1,36 +1,27 @@
-import {
-  gql,
-  useLazyQuery,
-  useMutation,
-  useSubscription,
-} from "@apollo/client";
+const client = require("../hasura/hasuraClient");
+const { default: gql } = require("graphql-tag");
 
-// [] - cuz reasons
-const [deleteLastMessage] = useMutation(
-  gql`
-    mutation DeleteLastMessage($message_id: uuid!) {
-      delete_message_history_by_pk(id: $message_id) {
-        id
+const updateCoinPrice = async ({ value, crypto_code, crypto_name, source }) => {
+  await client.mutate({
+    mutation: gql`
+      mutation inserBTCPrice($objects: [crypto_price_updates_insert_input!]!) {
+        insert_crypto_price_updates(objects: $objects) {
+          affected_rows
+        }
       }
-    }
-  `
-);
+    `,
+    variables: {
+      objects: [
+        {
+          value,
+          crypto_code,
+          crypto_name,
+          source,
+        },
+      ],
+    },
+  });
+  console.log("BTC Price updated!");
+};
 
-const [addMessage] = useMutation(gql`
-  mutation MyMutation($message_payload: [message_history_insert_input!]!) {
-    insert_message_history(objects: $message_payload) {
-      returning {
-        id
-      }
-    }
-  }
-`);
-
-const [getUserId, userPayload] = useLazyQuery(gql`
-  query getUserId($name: String) {
-    user(where: { name: { _eq: $name } }) {
-      user_id
-      name
-    }
-  }
-`);
+module.exports = updateCoinPrice;
