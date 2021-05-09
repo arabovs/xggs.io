@@ -1,4 +1,6 @@
+const { default: gql } = require("graphql-tag");
 const puppeteer = require("puppeteer");
+const client = require("./hasura/hasuraClient");
 
 const URL_COINMARKETCAP = "https://coinmarketcap.com/";
 const URL_XE =
@@ -13,6 +15,8 @@ const SELECTOR_XE =
   "#__next > div:nth-child(2) > div.fluid-container__BaseFluidContainer-qoidzu-0.gJBOzk > section > div:nth-child(2) > div > main > form > div:nth-child(2) > div.result__Repulsor-sc-1bsijpp-4.dZGBTm > div:nth-child(1) > div.unit-rates___StyledDiv-sc-1dk593y-0.dEqdnx > p";
 const SELECTOR_GOOGLE =
   "#knowledge-finance-wholepage__entity-summary > div > g-card-section > div > g-card-section > div.wGt0Bc > div:nth-child(1) > span:nth-child(1) > span > span";
+
+const BTC_CODE = "BTC";
 
 const cleanupPrice = (string) => {
   if (string.includes("$")) {
@@ -35,8 +39,25 @@ const getPageData = async (browser, url, selector) => {
 (async () => {
   const browser = await puppeteer.launch();
   const btcPrice = await getPageData(browser, URL_COINMARKETCAP, SELECTOR_BTC);
-  const ethPrice = await getPageData(browser, URL_COINMARKETCAP, SELECTOR_ETH);
-  console.log(btcPrice);
-  console.log(ethPrice);
-  https: await browser.close();
+  await client.mutate({
+    mutation: gql`
+      mutation inserBTCPrice($objects: [crypto_price_updates_insert_input!]!) {
+        insert_crypto_price_updates(objects: $objects) {
+          affected_rows
+        }
+      }
+    `,
+    variables: {
+      objects: [
+        {
+          value: btcPrice,
+          crypto_code: BTC_CODE,
+          crypto_name: "Bitcoin",
+          source: "CMC",
+        },
+      ],
+    },
+  });
+  process.exit(0);
+  await browser.close();
 })();
