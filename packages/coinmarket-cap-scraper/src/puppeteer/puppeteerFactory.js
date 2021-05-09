@@ -33,12 +33,14 @@ const getPageData = async (browser, url, selector) => {
     (selector) => document.querySelector(selector).innerText,
     selector
   );
+  await page.close();
   return cleanupPrice(data);
 };
 
 (async () => {
   const browser = await puppeteer.launch();
   const btcPrice = await getPageData(browser, URL_COINMARKETCAP, SELECTOR_BTC);
+  console.log(`BTC price is ${btcPrice}`);
   await updateCoinPrice({
     value: btcPrice,
     crypto_code: "BTC",
@@ -46,5 +48,4 @@ const getPageData = async (browser, url, selector) => {
     source: "CC",
   });
   process.exit(0);
-  await browser.close();
 })();
