@@ -1,4 +1,4 @@
-const client = require("../hasura/hasuraClient");
+const client = require("./hasuraClient");
 const { default: gql } = require("graphql-tag");
 
 const updateCoinPrice = async ({ value, crypto_code, crypto_name, source }) => {
@@ -21,7 +21,7 @@ const updateCoinPrice = async ({ value, crypto_code, crypto_name, source }) => {
       ],
     },
   });
-  console.log("BTC Price updated!");
+  console.log("Inserted!");
 };
 
 module.exports = updateCoinPrice;

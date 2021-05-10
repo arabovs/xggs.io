@@ -1,25 +1,17 @@
 import React from "react"
-import { useSubscription, gql } from "@apollo/client"
-import { Box } from "@material-ui/core"
-import { graphql } from "gatsby"
+import { useSubscription, gql, fromPromise } from "@apollo/client"
+import { Box, Grid } from "@material-ui/core"
+import { PriceBox } from "../components/PriceBox"
+import { IndexBox } from "../components/IndexBox"
 
 const Pricing = () => {
-  const { data, loading, error } = useSubscription(gql`
-    subscription MySubscription {
-      crypto_price_updates(order_by: { created_at: desc }, limit: 1) {
-        value
-      }
-    }
-  `)
-  if (loading) {
-    return <Box>Loading</Box>
-  }
-  if (error) {
-    console.log(error)
-    return <Box>Error</Box>
-  }
-  console.log(data)
-  return <Box>{data.crypto_price_updates[0].value}</Box>
+  return (
+    <Box>
+      <PriceBox crypto_code="BTC" />
+      <PriceBox crypto_code="ETH" />
+      <IndexBox index_code="FTSE100" />
+    </Box>
+  )
 }
 
 export default Pricing
