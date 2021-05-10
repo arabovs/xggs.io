@@ -58,5 +58,4 @@ const updateIndexPrice = async ({
   console.log("Inserted!");
 };
 
-module.exports = updateCoinPrice;
-module.exports = updateIndexPrice;
+module.exports = { updateCoinPrice, updateIndexPrice };

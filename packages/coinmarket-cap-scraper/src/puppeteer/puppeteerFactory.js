@@ -1,6 +1,9 @@
 const { default: gql } = require("graphql-tag");
 const puppeteer = require("puppeteer");
-const updateCoinPrice = require("../../../hasura/src/hasura/hasuraHelper");
+const {
+  updateCoinPrice,
+  updateIndexPrice,
+} = require("../../../hasura/src/hasura/hasuraHelper");
 
 const URL_COINMARKETCAP = "https://coinmarketcap.com/";
 const URL_XE =
