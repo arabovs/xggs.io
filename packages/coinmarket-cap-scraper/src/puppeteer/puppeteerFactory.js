@@ -1,6 +1,9 @@
 const { default: gql } = require("graphql-tag");
 const puppeteer = require("puppeteer");
-const updateCoinPrice = require("../../../hasura/src/hasura/hasuraHelper");
+const {
+  updateCoinPrice,
+  updateIndexPrice,
+} = require("../../../hasura/src/hasura/hasuraHelper");
 
 const URL_COINMARKETCAP = "https://coinmarketcap.com/";
 const URL_XE =
@@ -17,7 +20,7 @@ const SELECTOR_XE =
   "#__next > div:nth-child(2) > div.fluid-container__BaseFluidContainer-qoidzu-0.gJBOzk > section > div:nth-child(2) > div > main > form > div:nth-child(2) > div.result__Repulsor-sc-1bsijpp-4.dZGBTm > div:nth-child(1) > div.unit-rates___StyledDiv-sc-1dk593y-0.dEqdnx > p";
 const SELECTOR_GOOGLE =
   "#knowledge-finance-wholepage__entity-summary > div > g-card-section > div > g-card-section > div.wGt0Bc > div:nth-child(1) > span:nth-child(1) > span > span";
-const SELECTOR_FTSE1000_LSE =
+const SELECTOR_FTSE100_LSE =
   "#ftse-ticker > div > section > div > div.wrapper.flex-container.ticker-header > span.ticker-price > div > span.last-price.larger-font-size.bold-font-weight > span";
 const BTC_CODE = "BTC";
 
@@ -55,15 +58,19 @@ const getPageData = async (browser, url, selector) => {
       SELECTOR_ETH
     );
 
-    const ftse1000Price = await getPageData(
+    const ftse100Price = await getPageData(
       browser,
       URL_LSE_FTSE100,
-      SELECTOR_FTSE1000_LSE
+      SELECTOR_FTSE100_LSE
     );
 
+    const ftse100ToBTC = ftse100Price / btcPrice;
+    const ftse100ToETH = ftse100Price / ethPrice;
     console.log(`BTC price is ${btcPrice}`);
     console.log(`ETH price is ${ethPrice}`);
-    console.log(`FTSE100 price is ${ftse1000Price}`);
+    console.log(`FTSE100 price is ${ftse100Price}`);
+    console.log(`FTSE100 price is ${ftse100ToBTC}`);
+    console.log(`FTSE100 price is ${ftse100ToETH}`);
 
     await updateCoinPrice({
       value: btcPrice,
@@ -79,10 +86,19 @@ const getPageData = async (browser, url, selector) => {
       source: "CC",
     });
 
-    await updateCoinPrice({
-      value: ftse1000Price,
-      crypto_code: "FTSE100",
-      crypto_name: "FTSE100",
+    await updateIndexPrice({
+      crypto_base_code: "BTC",
+      crypto_index_price: ftse100ToBTC,
+      index_code: "FTSE100",
+      index_price: ftse100Price,
+      source: "LSE",
+    });
+
+    await updateIndexPrice({
+      crypto_base_code: "ETH",
+      crypto_index_price: ftse100ToETH,
+      index_code: "FTSE100",
+      index_price: ftse100Price,
       source: "LSE",
     });
   } catch (e) {

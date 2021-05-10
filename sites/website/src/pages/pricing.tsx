@@ -1,5 +1,4 @@
 import React from "react"
-import { useSubscription, gql, fromPromise } from "@apollo/client"
 import { Box, Grid, Paper } from "@material-ui/core"
 import { PriceBox } from "../components/PriceBox"
 import { IndexBox } from "../components/IndexBox"
