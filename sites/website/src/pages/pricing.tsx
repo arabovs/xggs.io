@@ -9,7 +9,6 @@ const Pricing = () => {
     <Box>
       <PriceBox crypto_code="BTC" />
       <PriceBox crypto_code="ETH" />
-      <IndexBox index_code="FTSE100" />
     </Box>
   )
 }
