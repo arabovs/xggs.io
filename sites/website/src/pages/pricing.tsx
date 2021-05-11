@@ -21,12 +21,12 @@ const Pricing = () => {
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12} style={{ height: "100%" }}>
           <Paper>
-            <PriceBox crypto_code="FTSE100" />
+            <IndexBox crypto_base_code="BTC" />
           </Paper>
         </Grid>
         <Grid item sm={6} xs={12} style={{ height: "100%" }}>
           <Paper>
-            <PriceBox crypto_code="FTSE100" />
+            <IndexBox crypto_base_code="ETH" />
           </Paper>
         </Grid>
       </Grid>

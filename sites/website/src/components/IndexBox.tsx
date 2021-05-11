@@ -5,57 +5,36 @@ import { Box } from "@material-ui/core"
 export const IndexBox = props => {
   const { data, loading, error } = useSubscription(
     gql`
-      subscription CryptoPriceSubscription($crypto_code: String!) {
-        crypto_price_updates(
-          where: { crypto_code: { _eq: $crypto_code } }
+      subscription IndexPriceSubscription($crypto_base_code: String!) {
+        index_price_updates(
+          where: { crypto_base_code: { _eq: $crypto_base_code } }
           order_by: { created_at: desc }
           limit: 1
         ) {
-          value
-          crypto_code
+          crypto_index_price
+          crypto_base_code
         }
       }
     `,
     {
       variables: {
-        crypto_code: "BTC",
+        crypto_base_code: props.crypto_base_code,
       },
     }
   )
-
-  const data1 = useSubscription(
-    gql`
-      subscription IndexPriceSubscription($index_code: String!) {
-        crypto_price_updates(
-          where: { crypto_code: { _eq: $index_code } }
-          order_by: { created_at: desc }
-          limit: 1
-        ) {
-          value
-          crypto_code
-        }
-      }
-    `,
-    {
-      variables: {
-        index_code: props.index_code,
-      },
-    }
-  )
-
-  if (loading && data1.loading) {
+  if (loading) {
     return <Box>Loading</Box>
   }
-  if (error && data1.error) {
+  if (error) {
     console.log(error)
     return <Box>Error</Box>
   }
-
+  console.log(data)
   return (
     <Box>
-      {props.index_code} to BTC :{" "}
-      {data1.data.crypto_price_updates[0].value /
-        data.crypto_price_updates[0].value}
+      FTSE100{": "}
+      {data.index_price_updates[0].crypto_index_price} :{" "}
+      {data.index_price_updates[0].crypto_base_code}
     </Box>
   )
 }
