@@ -5,9 +5,15 @@ import { Box } from "@material-ui/core"
 export const IndexBox = props => {
   const { data, loading, error } = useSubscription(
     gql`
-      subscription IndexPriceSubscription($crypto_base_code: String!) {
+      subscription IndexPriceSubscription(
+        $crypto_base_code: String!
+        $index_code: String!
+      ) {
         index_price_updates(
-          where: { crypto_base_code: { _eq: $crypto_base_code } }
+          where: {
+            crypto_base_code: { _eq: $crypto_base_code }
+            index_code: { _eq: $index_code }
+          }
           order_by: { created_at: desc }
           limit: 1
         ) {
@@ -19,6 +25,7 @@ export const IndexBox = props => {
     {
       variables: {
         crypto_base_code: props.crypto_base_code,
+        index_code: props.index_code,
       },
     }
   )
@@ -38,5 +45,3 @@ export const IndexBox = props => {
     </Box>
   )
 }
-
-//beautiful work kdichev

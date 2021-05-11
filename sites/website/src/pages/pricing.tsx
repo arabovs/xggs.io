@@ -2,6 +2,7 @@ import React from "react"
 import { Box, Grid, Paper } from "@material-ui/core"
 import { PriceBox } from "../components/PriceBox"
 import { IndexBox } from "../components/IndexBox"
+import { Layout } from "../components/Layout"
 
 const Pricing = () => {
   return (
@@ -21,12 +22,12 @@ const Pricing = () => {
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12} style={{ height: "100%" }}>
           <Paper>
-            <IndexBox crypto_base_code="BTC" />
+            <IndexBox crypto_base_code="BTC" index_code="FTSE100" />
           </Paper>
         </Grid>
         <Grid item sm={6} xs={12} style={{ height: "100%" }}>
           <Paper>
-            <IndexBox crypto_base_code="ETH" />
+            <IndexBox crypto_base_code="ETH" index_code="FTSE100" />
           </Paper>
         </Grid>
       </Grid>
