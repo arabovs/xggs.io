@@ -6,8 +6,6 @@ const {
   getCryptoSelector,
 } = require("../../../hasura/src/hasura/hasuraHelper");
 
-const BTC_CODE = "BTC";
-
 const cleanupPrice = (string) => {
   if (string.includes("$")) {
     return parseFloat(string.replace(",", "").replace("$", ""));
@@ -21,7 +19,6 @@ const getPageData = async (browser, security_code, source) => {
     security_code,
     source,
   });
-  console.log(puppeteer_crypto_selectors);
   await page.goto(puppeteer_crypto_selectors[0].url);
 
   const data = await page.evaluate(
@@ -48,33 +45,40 @@ const getPageData = async (browser, security_code, source) => {
     console.log(`FTSE100 price is ${ftse100ToETH}`);
 
     await updateCoinPrice({
-      value: btcPrice,
-      crypto_code: "BTC",
-      crypto_name: "Bitcoin",
-      source: "CC",
+      objects: [
+        {
+          value: btcPrice,
+          crypto_code: "BTC",
+          crypto_name: "Bitcoin",
+          source: "CC",
+        },
+        {
+          value: ethPrice,
+          crypto_code: "ETH",
+          crypto_name: "Ethereum",
+          source: "CC",
+        },
+      ],
     });
 
-    await updateCoinPrice({
-      value: ethPrice,
-      crypto_code: "ETH",
-      crypto_name: "Ethereum",
-      source: "CC",
-    });
-
+    /** TO DO */
     await updateIndexPrice({
-      crypto_base_code: "BTC",
-      crypto_index_price: ftse100ToBTC,
-      index_code: "FTSE100",
-      index_price: ftse100Price,
-      source: "LSE",
-    });
-
-    await updateIndexPrice({
-      crypto_base_code: "ETH",
-      crypto_index_price: ftse100ToETH,
-      index_code: "FTSE100",
-      index_price: ftse100Price,
-      source: "LSE",
+      objects: [
+        {
+          crypto_base_code: "BTC",
+          crypto_index_price: ftse100ToBTC,
+          index_code: "FTSE100",
+          index_price: ftse100Price,
+          source: "LSE",
+        },
+        {
+          crypto_base_code: "ETH",
+          crypto_index_price: ftse100ToETH,
+          index_code: "FTSE100",
+          index_price: ftse100Price,
+          source: "LSE",
+        },
+      ],
     });
   } catch (e) {
     console.log(e);
