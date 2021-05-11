@@ -39,7 +39,8 @@ export const IndexBox = props => {
   console.log(data)
   return (
     <Box>
-      FTSE100{": "}
+      {props.index_code}
+      {": "}
       {data.index_price_updates[0].crypto_index_price} :{" "}
       {data.index_price_updates[0].crypto_base_code}
     </Box>

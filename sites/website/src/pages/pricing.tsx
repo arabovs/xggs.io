@@ -29,6 +29,18 @@ const Pricing = () => {
           </Paper>
         </Grid>
       </Grid>
+      <Grid container spacing={1}>
+        <Grid item sm={6} xs={12}>
+          <Paper>
+            <IndexBox crypto_base_code="BTC" index_code="FTSE250" />
+          </Paper>
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <Paper>
+            <IndexBox crypto_base_code="ETH" index_code="FTSE250" />
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   )
 }
