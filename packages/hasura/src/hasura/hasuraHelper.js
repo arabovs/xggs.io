@@ -58,4 +58,27 @@ const updateIndexPrice = async ({
   console.log("Inserted!");
 };
 
-module.exports = { updateCoinPrice, updateIndexPrice };
+const getCryptoSelector = async ({ source, security_code }) => {
+  const { data } = await client.query({
+    query: gql`
+      query MyQuery($source: String, $security_code: String) {
+        puppeteer_crypto_selectors(
+          where: {
+            _and: { source: { _eq: $source } }
+            security_code: { _eq: $security_code }
+          }
+        ) {
+          selector
+          url
+        }
+      }
+    `,
+    variables: {
+      source,
+      security_code,
+    },
+  });
+  return data;
+};
+
+module.exports = { updateCoinPrice, updateIndexPrice, getCryptoSelector };
