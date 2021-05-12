@@ -1,7 +1,7 @@
 const client = require("./hasuraClient");
 const { default: gql } = require("graphql-tag");
 
-const updateCoinPrice = async ({ objects }) => {
+const updateCryptoPrice = async ({ objects }) => {
   await client.mutate({
     mutation: gql`
       mutation insertCryptoPrice(
@@ -60,4 +60,4 @@ const getCryptoSelector = async ({ source, security_code }) => {
   return data;
 };
 
-module.exports = { updateCoinPrice, updateIndexPrice, getCryptoSelector };
+module.exports = { updateCryptoPrice, updateIndexPrice, getCryptoSelector };

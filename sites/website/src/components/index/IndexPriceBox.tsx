@@ -2,29 +2,25 @@ import React from "react"
 import { useSubscription, gql } from "@apollo/client"
 import { Box } from "@material-ui/core"
 
-export const IndexBox = props => {
+export const IndexPriceBox = props => {
   const { data, loading, error } = useSubscription(
     gql`
       subscription IndexPriceSubscription(
-        $crypto_base_code: String!
+        $source: String!
         $index_code: String!
       ) {
         index_price_updates(
-          where: {
-            crypto_base_code: { _eq: $crypto_base_code }
-            index_code: { _eq: $index_code }
-          }
+          where: { source: { _eq: $source }, index_code: { _eq: $index_code } }
           order_by: { created_at: desc }
           limit: 1
         ) {
-          crypto_index_price
-          crypto_base_code
+          index_price
         }
       }
     `,
     {
       variables: {
-        crypto_base_code: props.crypto_base_code,
+        source: props.source,
         index_code: props.index_code,
       },
     }
@@ -41,8 +37,7 @@ export const IndexBox = props => {
     <Box>
       {props.index_code}
       {": "}
-      {data.index_price_updates[0].crypto_index_price} :{" "}
-      {data.index_price_updates[0].crypto_base_code}
+      {data.index_price_updates[0].index_price}
     </Box>
   )
 }

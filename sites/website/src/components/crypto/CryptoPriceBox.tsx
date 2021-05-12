@@ -2,16 +2,16 @@ import React from "react"
 import { useSubscription, gql } from "@apollo/client"
 import { Box } from "@material-ui/core"
 
-export const PriceBox = props => {
+export const CryptoPriceBox = props => {
   const { data, loading, error } = useSubscription(
     gql`
-      subscription BTCPriceSubscription($crypto_code: String!) {
+      subscription CryptoPriceSubscription($crypto_code: String!) {
         crypto_price_updates(
           where: { crypto_code: { _eq: $crypto_code } }
           order_by: { created_at: desc }
           limit: 1
         ) {
-          value
+          crypto_price
           crypto_code
         }
       }
@@ -32,7 +32,7 @@ export const PriceBox = props => {
   console.log(data)
   return (
     <Box>
-      {props.crypto_code} : {data.crypto_price_updates[0].value}
+      {props.crypto_code} : {data.crypto_price_updates[0].crypto_price}
     </Box>
   )
 }
