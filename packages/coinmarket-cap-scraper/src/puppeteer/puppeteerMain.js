@@ -26,73 +26,9 @@ const INDEX_SOURCE = ["LSE"];
   }
   process.exit(0);
 })();
-/**
-    const ftse100ToBTC = ftse100Price / btcPrice;
-    const ftse100ToETH = ftse100Price / ethPrice;
-    const ftse250ToBTC = ftse250Price / btcPrice;
-    const ftse250ToETH = ftse250Price / ethPrice;
-
-    await updateCoinPrice({
-      objects: [
-        {
-          value: btcPrice,
-          crypto_code: "BTC",
-          crypto_name: "Bitcoin",
-          source: "CC",
-        },
-        {
-          value: ethPrice,
-          crypto_code: "ETH",
-          crypto_name: "Ethereum",
-          source: "CC",
-        },
-      ],
-    });
-
-    /** TO DO 
-    await updateIndexPrice({
-      objects: [
-        {
-          crypto_base_code: "BTC",
-          crypto_index_price: ftse100ToBTC,
-          index_code: "FTSE100",
-          index_price: ftse100Price,
-          source: "LSE",
-        },
-        {
-          crypto_base_code: "ETH",
-          crypto_index_price: ftse100ToETH,
-          index_code: "FTSE100",
-          index_price: ftse100Price,
-          source: "LSE",
-        },
-        {
-          crypto_base_code: "ETH",
-          crypto_index_price: ftse250ToETH,
-          index_code: "FTSE250",
-          index_price: ftse250Price,
-          source: "LSE",
-        },
-        {
-          crypto_base_code: "BTC",
-          crypto_index_price: ftse250ToBTC,
-          index_code: "FTSE250",
-          index_price: ftse250Price,
-          source: "LSE",
-        },
-      ],
-    });
-  } catch (e) {
-    console.log(e);
-    await browser.close();
-  } finally {
-    await browser.close();
-  }
-  process.exit(0);
-})();  */
 
 const getMetalPricingData = async (browser) => {
-  console.log("Fetching Index Pricing");
+  console.log("Fetching Metal Pricing");
   const metalPricing = [];
   for (var index_code of INDEX_CODES) {
     for (var source of INDEX_SOURCE) {
