@@ -31,7 +31,7 @@ export const CryptoPriceBox = props => {
   }
   console.log(data)
   return (
-    <Box>
+    <Box align="center">
       {props.crypto_code} : {data.crypto_price_updates[0].crypto_price}
     </Box>
   )

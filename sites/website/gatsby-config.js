@@ -12,6 +12,16 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: `Goblin One`,
+                variants: [`300`, `400`, `500`],
+              },
+            ],
+          },
+        },
       },
     },
     `gatsby-transformer-sharp`,
