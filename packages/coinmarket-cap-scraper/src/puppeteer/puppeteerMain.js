@@ -8,7 +8,7 @@ const {
 
 const CRYPTO_CODES = ["BTC", "ETH"];
 const CRYPTO_SOURCE = ["CMC"];
-const INDEX_CODES = ["FTSE100", "FTSE250"];
+const INDEX_CODES = ["FTSE100", "FTSE250", "FTSE350", "FTSEALL"];
 const INDEX_SOURCE = ["LSE"];
 
 (async () => {
