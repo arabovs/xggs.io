@@ -4,9 +4,9 @@ import { Box } from "@material-ui/core"
 import { getCryptoLatestPrice } from "../../../../../packages/hasura/src/hasura/hasuraHelper"
 
 export const IndexPriceBox = props => {
-  const data2 = getCryptoLatestPrice({
+  /**const data2 = getCryptoLatestPrice({
     objects: { source: "CMC", crypto_code: "BTC" },
-  })
+  })**/
   const { data, loading, error } = useSubscription(
     gql`
       subscription IndexPriceSubscription(
