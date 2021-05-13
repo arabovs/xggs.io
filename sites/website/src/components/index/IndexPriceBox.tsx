@@ -28,15 +28,53 @@ export const IndexPriceBox = props => {
       },
     }
   )
+
+  const {
+    data: crypto_data,
+    loading: crypto_loading,
+    error: crypto_error,
+  } = useSubscription(
+    gql`
+      subscription CryptoPriceSubscription(
+        $source: String!
+        $crypto_code: String!
+      ) {
+        crypto_price_updates(
+          where: {
+            source: { _eq: $source }
+            crypto_code: { _eq: $crypto_code }
+          }
+          order_by: { created_at: desc }
+          limit: 1
+        ) {
+          crypto_price
+        }
+      }
+    `,
+    {
+      variables: {
+        source: props.crypto_source,
+        crypto_code: props.crypto_code,
+      },
+    }
+  )
+
+  console.log("LOG", crypto_data)
+  let calculated = 0.0
   if (loading) {
     return <Box>Loading</Box>
   }
   if (error) {
-    console.log(error)
     return <Box>Error</Box>
   }
-  console.log(data)
-  const calculated = data.index_price_updates[0].index_price / 1000
+
+  if (crypto_data !== null) {
+    calculated =
+      data.index_price_updates[0].index_price /
+      crypto_data.crypto_price_updates[0].crypto_price
+  }
+  console.log("LOG2", data)
+
   return (
     <Box>
       <Grid container spacing={1}>

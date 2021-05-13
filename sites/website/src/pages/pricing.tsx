@@ -20,24 +20,44 @@ const Pricing = () => {
         <Grid container spacing={1}>
           <Grid item sm={6} xs={12}>
             <Paper>
-              <IndexPriceBox source="LSE" index_code="FTSE100" />
+              <IndexPriceBox
+                source="LSE"
+                index_code="FTSE100"
+                crypto_source="CMC"
+                crypto_code="BTC"
+              />
             </Paper>
           </Grid>
           <Grid item sm={6} xs={12}>
             <Paper>
-              <IndexPriceBox source="LSE" index_code="FTSE250" />
+              <IndexPriceBox
+                source="LSE"
+                index_code="FTSE250"
+                crypto_source="CMC"
+                crypto_code="BTC"
+              />
             </Paper>
           </Grid>
         </Grid>
         <Grid container spacing={1}>
           <Grid item sm={6} xs={12}>
             <Paper>
-              <IndexPriceBox source="LSE" index_code="FTSE350" />
+              <IndexPriceBox
+                source="LSE"
+                index_code="FTSE350"
+                crypto_source="CMC"
+                crypto_code="BTC"
+              />
             </Paper>
           </Grid>
           <Grid item sm={6} xs={12}>
             <Paper>
-              <IndexPriceBox source="LSE" index_code="FTSEALL" />
+              <IndexPriceBox
+                source="LSE"
+                index_code="FTSEALL"
+                crypto_source="CMC"
+                crypto_code="BTC"
+              />
             </Paper>
           </Grid>
         </Grid>
