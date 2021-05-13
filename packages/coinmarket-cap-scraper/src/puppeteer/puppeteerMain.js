@@ -6,7 +6,7 @@ const {
   getCryptoSelector,
 } = require("../../../hasura/src/hasura/hasuraHelper");
 
-const CRYPTO_CODES = ["BTC", "ETH"];
+const CRYPTO_CODES = ["BTC"];
 const CRYPTO_SOURCE = ["CMC"];
 const INDEX_CODES = ["FTSE100", "FTSE250", "FTSE350", "FTSEALL"];
 const INDEX_SOURCE = ["LSE"];
@@ -15,8 +15,16 @@ const INDEX_SOURCE = ["LSE"];
   const browser = await puppeteer.launch();
   try {
     const cryptoPricing = await getCryptoPagesPricingData(browser);
-    await updateCryptoPrice({ objects: cryptoPricing });
     const indexPricing = await getIndexPagesPricingData(browser);
+
+    for (let crypto of cryptoPricing) {
+      const btc_price = cryptoPricing[0].crypto_price;
+      indexPricing.map(
+        (item) => (item.index_btc_conversion = item.index_price / btc_price)
+      );
+    }
+
+    await updateCryptoPrice({ objects: cryptoPricing });
     await updateIndexPrice({ objects: indexPricing });
   } catch (e) {
     console.log(e);
@@ -26,23 +34,6 @@ const INDEX_SOURCE = ["LSE"];
   }
   process.exit(0);
 })();
-
-const getMetalPricingData = async (browser) => {
-  console.log("Fetching Metal Pricing");
-  const metalPricing = [];
-  for (var index_code of INDEX_CODES) {
-    for (var source of INDEX_SOURCE) {
-      const result = await getPageData(browser, metal_code, source);
-      metalPricing.push({
-        metal_price: result,
-        metal_code,
-        source,
-      });
-    }
-  }
-  printLog(indexPricing);
-  return indexPricing;
-};
 
 const getIndexPagesPricingData = async (browser) => {
   console.log("Fetching Index Pricing");
@@ -80,6 +71,12 @@ const getCryptoPagesPricingData = async (browser) => {
 
 const getPageData = async (browser, security_code, source) => {
   const page = await browser.newPage();
+  console.log(
+    getCryptoSelector({
+      security_code,
+      source,
+    })
+  );
   const { puppeteer_crypto_selectors } = await getCryptoSelector({
     security_code,
     source,

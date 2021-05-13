@@ -2,6 +2,8 @@ import React from "react"
 import { Box, Grid, Paper, Container, ThemeProvider } from "@material-ui/core"
 import { IndexPriceBox } from "../components/index/IndexPriceBox"
 import { GridPrice } from "../components/GridPrice"
+const client = require("../../../../packages/hasura/src/hasura/hasuraClient")
+const { default: gql } = require("graphql-tag")
 
 const Pricing = () => {
   return (
@@ -13,53 +15,10 @@ const Pricing = () => {
           </Grid>
           <Grid item sm={6} xs={12}>
             <Paper>
-              <GridPrice crypto_code="ETH" />
+              <GridPrice crypto_code="BTC" />
             </Paper>
           </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item sm={6} xs={12}>
-            <Paper>
-              <IndexPriceBox
-                source="LSE"
-                index_code="FTSE100"
-                crypto_source="CMC"
-                crypto_code="BTC"
-              />
-            </Paper>
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <Paper>
-              <IndexPriceBox
-                source="LSE"
-                index_code="FTSE250"
-                crypto_source="CMC"
-                crypto_code="BTC"
-              />
-            </Paper>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item sm={6} xs={12}>
-            <Paper>
-              <IndexPriceBox
-                source="LSE"
-                index_code="FTSE350"
-                crypto_source="CMC"
-                crypto_code="BTC"
-              />
-            </Paper>
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <Paper>
-              <IndexPriceBox
-                source="LSE"
-                index_code="FTSEALL"
-                crypto_source="CMC"
-                crypto_code="BTC"
-              />
-            </Paper>
-          </Grid>
+          <IndexPriceBox />
         </Grid>
       </Box>
     </Container>
