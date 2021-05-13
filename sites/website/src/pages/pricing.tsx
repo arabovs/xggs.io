@@ -13,11 +13,6 @@ const Pricing = () => {
           <Grid item sm={6} xs={12}>
             <GridPrice crypto_code="BTC" />
           </Grid>
-          <Grid item sm={6} xs={12}>
-            <Paper>
-              <GridPrice crypto_code="BTC" />
-            </Paper>
-          </Grid>
           <IndexPriceBox />
         </Grid>
       </Box>
