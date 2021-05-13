@@ -1,7 +1,6 @@
 import React from "react"
 import { useSubscription, gql } from "@apollo/client"
-import { Box } from "@material-ui/core"
-import { getCryptoLatestPrice } from "../../../../../packages/hasura/src/hasura/hasuraHelper"
+import { Box, Grid } from "@material-ui/core"
 
 export const IndexPriceBox = props => {
   /**const data2 = getCryptoLatestPrice({
@@ -37,12 +36,21 @@ export const IndexPriceBox = props => {
     return <Box>Error</Box>
   }
   console.log(data)
-
+  const calculated = data.index_price_updates[0].index_price / 1000
   return (
     <Box>
-      {props.index_code}
-      {": "}
-      {data.index_price_updates[0].index_price}
+      <Grid container spacing={1}>
+        <Grid item sm={6} xs={12}>
+          <Box>
+            {props.index_code}
+            {": "}
+            {data.index_price_updates[0].index_price}
+          </Box>
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <Box>Converted: {calculated}</Box>
+        </Grid>
+      </Grid>
     </Box>
   )
 }
