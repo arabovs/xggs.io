@@ -6,9 +6,13 @@ export const IndexPriceBox = props => {
   const { data, loading, error } = useSubscription(
     gql`
       subscription IndexPriceSubscription() {
-        index_price_updates(order_by: { created_at: desc }, limit: 1) {
-          index_price
-          index_btc_conversion
+        index_price_updates(
+          order_by: { created_at: desc }
+          limit: 4
+        ) {
+          index_btc_conversion,
+          index_price,
+          index_code
         }
       }
     `
