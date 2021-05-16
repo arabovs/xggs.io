@@ -16,7 +16,7 @@ module.exports = {
           fonts: {
             google: [
               {
-                family: `Goblin One`,
+                family: `Open Sans Condensed`,
                 variants: [`300`, `400`, `500`],
               },
             ],
