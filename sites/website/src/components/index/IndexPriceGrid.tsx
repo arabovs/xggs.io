@@ -16,9 +16,6 @@ export const IndexPriceGrid = props => {
               style={{ opacity: 0.75, minHeight: "40vh", maxHeight: "40vh" }}
             >
               <Box py={0.5} m={0.2}>
-                <Typography variant="h5" gutterBottom align="left">
-                  {i}
-                </Typography>
                 <Typography variant="subtitle1" align="left">
                   {i}
                 </Typography>

@@ -6,6 +6,8 @@ const Index = () => {
   return (
     <Box>
       <IndexPriceAccordion />
+      <IndexPriceAccordion />
+      <IndexPriceAccordion />
     </Box>
   )
 }
