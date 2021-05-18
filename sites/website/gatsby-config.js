@@ -17,7 +17,7 @@ module.exports = {
             google: [
               {
                 family: `Open Sans Condensed`,
-                variants: [`300`, `400`, `500`],
+                variants: [`100`, `200`, `300`],
               },
             ],
           },

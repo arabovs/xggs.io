@@ -19,8 +19,6 @@ import GridPrice from "../GridPrice"
 import { indexTheme } from "../../theme/indexTheme"
 
 export const IndexPriceAccordion = props => {
-  const indeces = ["FTSE100", "FTSE250", "FTSE350", "FTSEALL"]
-
   return (
     <ThemeProvider theme={indexTheme}>
       <Box m={1} p={1}>
@@ -31,11 +29,14 @@ export const IndexPriceAccordion = props => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              FTSE Indexes
+              {props.index_code} Price Conversion:
             </AccordionSummary>
             <AccordionDetails>
               <Container>
-                <IndexTitle index_code="FTSE100" source="LSE" />
+                <IndexTitle
+                  index_code={props.index_code}
+                  source={props.source}
+                />
               </Container>
             </AccordionDetails>
           </Accordion>
