@@ -21,7 +21,7 @@ import { indexTheme } from "../../theme/indexTheme"
 export const IndexPriceAccordion = props => {
   return (
     <ThemeProvider theme={indexTheme}>
-      <Box m={1} p={1}>
+      <Box m={0.2} p={0.2}>
         <Paper>
           <Accordion>
             <AccordionSummary
