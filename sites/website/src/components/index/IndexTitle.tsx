@@ -28,23 +28,6 @@ export const IndexTitle = props => {
     }
   )
 
-  const getCryptoSelector = async () => {
-    const { data } = await client.query({
-      query: gql`
-        query MyQuery {
-          crypto_price_updates(
-            where: { crypto_code: { _eq: "BTC" } }
-            limit: 1
-            order_by: { created_at: desc }
-          ) {
-            crypto_price
-          }
-        }
-      `,
-    })
-    return data
-  }
-
   if (error) {
     return <Box>Error - contact admin</Box>
   }
@@ -61,7 +44,7 @@ export const IndexTitle = props => {
   })()
    */
 
-  const calculate = index_price / 43195.59
+  const calculate = index_price / props.crypt_price
 
   return (
     <ThemeProvider theme={indexTheme}>
