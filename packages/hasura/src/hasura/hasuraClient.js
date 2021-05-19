@@ -51,3 +51,32 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 module.exports = client;
+
+/**
+ * 
+ * 
+  const {
+    data: data_btc,
+    loading: loading_btc,
+    error: error_btc,
+  } = useSubscription(
+    gql`
+      subscription CryptoPriceUpdates {
+        crypto_price_updates(
+          where: { crypto_code: { _eq: "BTC" } }
+          order_by: { created_at: desc }
+          limit: 1
+        ) {
+          crypto_price
+        }
+      }
+    `,
+    {
+      variables: {
+        index_code: props.index_code,
+        source: props.source,
+      },
+    }
+  )
+
+ */
