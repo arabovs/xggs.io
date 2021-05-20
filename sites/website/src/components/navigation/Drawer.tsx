@@ -13,6 +13,7 @@ import {
   ArrowBack,
   Inbox as InboxIcon,
   Mail as MailIcon,
+  Link as LinkIcon,
 } from "@material-ui/icons"
 
 export const SideDrawer = ({ open, onCloseClick }) => {
@@ -27,22 +28,18 @@ export const SideDrawer = ({ open, onCloseClick }) => {
           <MailIcon />
         </ArrowBack>
       </Toolbar>
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
       <Divider />
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              {index === 1 ? (
+                <InboxIcon />
+              ) : index === 2 ? (
+                <LinkIcon />
+              ) : (
+                <MailIcon />
+              )}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
