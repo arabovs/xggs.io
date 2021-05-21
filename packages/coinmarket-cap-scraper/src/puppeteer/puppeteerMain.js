@@ -104,3 +104,30 @@ const cleanupPrice = (string) => {
   }
   return parseFloat(string.replace(",", ""));
 };
+
+// 0. use regex to fetch the URL selectors.
+//  a) failure at different points
+//  b)
+
+// 1. PriceComparator
+
+// add flag when finished to notify subscriber that the data has finished loading.
+// pass it to next process to compare the values between what we donwloaded and what is in the database and only save the
+// updates. Then send an update to the subscriber which will check the flag and update the Objects.
+// Timestamp. And then insert
+
+// receive
+// select frm db
+// compare
+// save required
+
+// 2. PriceNotifier one-to-many
+
+// notify all subscribers of the change.
+
+// 3. notify the subscribers, subscribers must implement these methods. Each subscriber must implement this foo
+
+// 4. Feed data to UI
+
+// Remote - WSL
+// ms-vscode-remote.remote-wsl
