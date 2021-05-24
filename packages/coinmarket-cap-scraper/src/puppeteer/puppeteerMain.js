@@ -6,7 +6,6 @@ const {
   getCryptoSelector,
 } = require("../../../hasura/src/hasura/hasuraHelper");
 
-
 const CRYPTO_CODES = ["BTC"];
 const CRYPTO_SOURCE = ["CMC"];
 const INDEX_CODES = ["FTSE100", "FTSE250", "FTSE350", "FTSEALL"];
