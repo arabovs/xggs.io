@@ -6,10 +6,10 @@ const {
   getCryptoSelector,
 } = require("../../../hasura/src/hasura/hasuraHelper");
 
-const CRYPTO_CODES = ["BTC"];
-const CRYPTO_SOURCE = ["CMC"];
+const CRYPTO_CODES = ["BTC", "ETH", "DOGE", "XMR", "BAT"];
+const CRYPTO_SOURCE = ["CMC", "BNB"];
 const INDEX_CODES = ["FTSE100", "FTSE250", "FTSE350", "FTSEALL"];
-const INDEX_SOURCE = ["LSE"];
+const INDEX_SOURCE = ["LSE", "BLOOMBERG"];
 
 (async () => {
   const browser = await puppeteer.launch();
