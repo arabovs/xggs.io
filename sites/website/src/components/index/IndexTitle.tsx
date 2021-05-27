@@ -38,7 +38,6 @@ export const IndexTitle = props => {
   return (
     <ThemeProvider theme={indexTheme}>
       <Paper>
-        <Box m={0.1}>{data}</Box>
         <Box>
           <Grid container spacing={1}>
             <Grid container spacing={1}>
