@@ -6,13 +6,7 @@ const createETHAccount = () => {
   return web3.eth.accounts.create();
 };
 
-const {
-  address,
-  privateKey,
-  signTransaction,
-  sign,
-  encrypt,
-} = createETHAccount();
-
-console.log(address);
-console.log(privateKey);
+module.exports = {
+  target: "node",
+  createETHAccount,
+};
