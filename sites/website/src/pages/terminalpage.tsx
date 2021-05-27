@@ -4,10 +4,17 @@ import Terminal from "terminal-in-react"
 import { render } from "react-dom"
 
 const TerminalPage = () => {
-  const showMsg = () => "Hello World"
+  const showMsg = () => "2"
 
   return (
-    <Box>
+    <Box
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <Terminal
         color="green"
         backgroundColor="black"
@@ -15,11 +22,12 @@ const TerminalPage = () => {
         style={{ fontSize: "1em" }}
         outputColor="yellow"
         commands={{
-          "open-google": () => window.open("https://www.google.com/", "_blank"),
+          "count number": () =>
+            window.open("https://www.google.com/", "_blank"),
           showmsg: showMsg,
           popup: () => alert("Terminal in React"),
         }}
-        msg="You can write anything here. Example - Hello! My name is Foo and I like Bar."
+        msg="This is a tiny terminal"
       />
     </Box>
   )
