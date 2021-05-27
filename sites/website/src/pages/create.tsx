@@ -5,15 +5,7 @@ import { createETHAccount } from "../../../../packages/web3-eth/src/web3-eth-lib
 const Create = () => {
   return (
     <Box>
-      <Button
-        onClick={() => {
-          fetch(createETHAccount())
-            .then(response => response.json())
-            .then(data => console.log("This is your data", data))
-        }}
-      >
-        ahaha
-      </Button>
+      <Button onClick={() => {}}>ahaha</Button>
     </Box>
   )
 }

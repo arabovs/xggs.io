@@ -7,6 +7,5 @@ const createETHAccount = () => {
 };
 
 module.exports = {
-  target: "node",
   createETHAccount,
 };
