@@ -1,0 +1,16 @@
+{
+  "name": "data-manager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "dfds",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/client": "^3.3.16",
+    "graphql": "^15.5.0",
+    "is-node": "^1.0.2",
+    "isomorphic-fetch": "^3.0.0",
+    "kafkajs": "^1.15.0",
+    "puppeteer": "^9.1.1",
+    "ws": "^7.4.5"
+  }
+}
